@@ -12,9 +12,6 @@ const { NotImplementedError } = require("../extensions/index.js");
  * stack.pop(); // undefined
  *
  */
-module.exports = {
-  Stack,
-};
 class Stack {
   constructor() {
     this.items = [];
@@ -25,20 +22,27 @@ class Stack {
   }
 
   pop() {
-    if (this.items.length === 0) {
-      return undefined;
-    }
-    return this.items.pop();
+    return this.items.pop(); // No need for explicit check, `pop()` returns `undefined` if empty
   }
 
   peek() {
-    if (this.items.length === 0) {
-      return undefined;
-    }
-    return this.items[this.items.length - 1];
+    return this.items[this.items.length - 1]; // No need for explicit check, will return `undefined` if empty
+  }
+
+  isEmpty() {
+    return this.items.length === 0;
   }
 }
 
-module.exports = {
-  Stack,
-};
+module.exports = { Stack };
+
+const stack = new Stack();
+
+stack.push(10);
+stack.push(20);
+console.log(stack.peek()); // 20
+console.log(stack.pop()); // 20
+console.log(stack.peek()); // 10
+console.log(stack.pop()); // 10
+console.log(stack.pop()); // undefined (stack is empty)
+console.log(stack.isEmpty()); // true
